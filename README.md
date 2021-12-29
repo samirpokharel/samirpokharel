@@ -5,7 +5,7 @@
 I'm **Sameer Pokhrel**. I'm an 12th-grade student pursuing Technical Education mortar_board from Pokhariya Secondary School. I'm a passionate learner who's always willing to learn and work across technologies. I love to explore new technologies and try to solve real-life problems sparkles. I'm currently into Mobile App development with flutter
 
 [![Linkedin Badge](https://img.shields.io/badge/-sameerpokharel-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/sameerpokharel)](https://www.linkedin.com/in/sameerpokharel/)
-[![Instagram Badge](https://img.shields.io/badge/-sameerpokharel-purple?style=flatlogo=instagram&logoColor=white&link=https://www.instagram.com/samerpokharel/)](https://www.instagram.com/samerpokharel/)
+[![Instagram Badge](https://img.shields.io/badge/-sameerpokharel-purple?style=flat&logo=instagram&logoColor=white&link=https://www.instagram.com/samerpokharel/)](https://www.instagram.com/samerpokharel/)
 [![Youtube Badge](https://img.shields.io/badge/-TechHoverStudio-darkred?style=flat&logo=youtube&logoColor=white&link=https://www.youtube.com/c/TechHoverStudio)](https://www.youtube.com/c/TechHoverStudio)
 [![Medium Badge](https://img.shields.io/badge/-@sameerpokharel-03a57a?style=flat&labelColor=000000&logo=Medium&link=https://sameerpokhrel.medium.com/)](https://sameerpokhrel.medium.com/)
 [![Hashnode](https://img.shields.io/badge/Hashnode-2962FF?style=flat&logo=hashnode&logoColor=white)](https://hashnode.com/@sameerpokharel)
