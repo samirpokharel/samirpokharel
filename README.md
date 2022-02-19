@@ -1,7 +1,9 @@
 
 <h1>Hi there! :wave:</h1>
 
-[![Signs fonts](https://see.fontimg.com/api/renderfont4/6Ya8x/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjQTNGQjNBIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/U2FtZWVyIHBva2hyZWw/safiar-signature.png)](https://sameerpokhrel.medium.com/)
+<img src="https://github.com/samirpokharel/samirpokharel/blob/main/Sameer%20Pokhrel%20(1).png" width="400" height="60" />
+
+
 
 I'm **Sameer Pokhrel**. I'm an 12th-grade student pursuing Technical Education mortar_board from Pokhariya Secondary School. I'm a passionate learner who's always willing to learn and work across technologies. I love to explore new technologies and try to solve real-life problems sparkles. I'm currently into Mobile App development with flutter
 
