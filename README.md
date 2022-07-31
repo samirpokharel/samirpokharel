@@ -1,11 +1,16 @@
 
-<h1>Hi there! :wave:</h1>
 
-<img src="https://github.com/samirpokharel/samirpokharel/blob/main/Sameer%20Pokhrel%20(1).png" width="400" height="60" />
+<!-- <img src="https://github.com/samirpokharel/samirpokharel/blob/main/Sameer%20Pokhrel%20(1).png" width="400" height="60" /> -->
+
+<img alt="Roaa's Welcome Message"
+			 src="https://readme-typing-svg.herokuapp.com?size=30&background=45E5FF00&center=false&vCenter=false&lines=Hi+there!+I'm+Sameer">
 
 
 
-I'm **Sameer Pokhrel**. I'm an 12th-grade student pursuing Technical Education mortar_board from Pokhariya Secondary School. I'm a passionate learner who's always willing to learn and work across technologies. I love to explore new technologies and try to solve real-life problems sparkles. I'm currently into Mobile App development with flutter
+I'm **Sameer Pokhrel**. I'm an 12th-grade student pursuing Technical Education mortar_board from Pokhariya Secondary School.
+I'm a passionate learner who's always willing to learn and work across technologies.
+
+I love to explore new technologies and try to solve real-life problems sparkles. I'm currently into Mobile App development with flutter
 
 [![Linkedin Badge](https://img.shields.io/badge/-sameerpokharel-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/sameerpokharel)](https://www.linkedin.com/in/sameerpokharel/)
 [![Instagram Badge](https://img.shields.io/badge/-sameerpokharel-purple?style=flat&logo=instagram&logoColor=white&link=https://www.instagram.com/samerpokharel/)](https://www.instagram.com/samerpokharel/)
