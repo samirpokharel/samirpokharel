@@ -7,8 +7,8 @@
 
 
 
-I'm **Sameer Pokhrel**. I'm an 12th-grade student pursuing Technical Education mortar_board from Pokhariya Secondary School.
-I'm a passionate learner who's always willing to learn and work across technologies.
+My name is **Sameer Pokhrel**. I am software developer with 2 year + developmenet Exprience in Designing, Developing, Testing, Dubgging 
+applications I'm a passionate learner  always willing to learn and work across technologies.
 
 I love to explore new technologies and try to solve real-life problems sparkles. I'm currently into Mobile App development with flutter
 
