@@ -7,10 +7,8 @@
 
 
 
-My name is **Sameer Pokhrel**. I am software developer with 2 year + developmenet Exprience in Designing, Developing, Testing, Dubgging 
-applications I'm a passionate learner  always willing to learn and work across technologies.
-
-I love to explore new technologies and try to solve real-life problems sparkles. I'm currently into Mobile App development with flutter
+My name is **Sameer Pokhrel**. I am software developer & passionate learner  always willing to learn and work across technologies.
+I love to explore new technologies and try to solve real-life problems sparkles. 
 
 [![Linkedin Badge](https://img.shields.io/badge/-sameerpokharel-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/sameerpokharel)](https://www.linkedin.com/in/sameerpokharel/)
 [![Instagram Badge](https://img.shields.io/badge/-sameerpokharel-purple?style=flat&logo=instagram&logoColor=white&link=https://www.instagram.com/samerpokharel/)](https://www.instagram.com/samerpokharel/)
