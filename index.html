@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samir Pokhrel - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'VT323', 'Courier New', monospace;
+            background: linear-gradient(135deg, #FF9B7F 0%, #FFB396 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle, rgba(0,0,0,0.2) 1.5px, transparent 1.5px),
+                radial-gradient(circle, rgba(0,0,0,0.2) 1.5px, transparent 1.5px);
+            background-size: 6px 6px;
+            background-position: 0 0, 3px 3px;
+            pointer-events: none;
+        }
+
+        .browser-window {
+            background: #E8E8E8;
+            border: 3px solid #000;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.3);
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .window-header {
+            background: linear-gradient(180deg, #DEDEDE 0%, #C8C8C8 100%);
+            padding: 12px 16px;
+            border-bottom: 3px solid #000;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .window-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .window-button {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .button-close {
+            background: linear-gradient(135deg, #FF6B5A 0%, #FF5744 100%);
+        }
+
+        .button-minimize {
+            background: linear-gradient(135deg, #FFBD2E 0%, #FFAA00 100%);
+        }
+
+        .button-maximize {
+            background: linear-gradient(135deg, #28CA42 0%, #1FB834 100%);
+        }
+
+        .window-content {
+            padding: 60px 70px;
+            background: #E8E8E8;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 92px;
+            font-weight: normal;
+            color: #000;
+            text-align: right;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            line-height: 0.9;
+        }
+
+        .hero-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            color: #000;
+            text-align: right;
+            margin-bottom: 50px;
+            letter-spacing: 0;
+        }
+
+        .section {
+            margin-bottom: 70px;
+            padding: 35px;
+            background: #FFF;
+            border: 3px solid #000;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .section:hover {
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            transform: translate(-2px, -2px);
+        }
+
+        .section-title {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .character-container {
+            position: fixed;
+            z-index: 1000;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .pixel-character {
+            width: 64px;
+            height: 64px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            transition: transform 0.3s;
+        }
+
+        .character-container.walking .pixel-character {
+            animation: walk 0.4s steps(2) infinite;
+        }
+
+        @keyframes walk {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFF4A6;
+            border: 3px solid #000;
+            padding: 8px 12px;
+            font-size: 18px;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+            animation: float 2s ease-in-out infinite;
+            font-family: 'Courier New', monospace;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 12px solid #000;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 9px solid #FFF4A6;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .bio-text {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #000;
+            flex: 1;
+        }
+
+        .bio-text p {
+            margin-bottom: 18px;
+        }
+
+        .bio-text strong {
+            font-weight: bold;
+        }
+
+        .experience-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #F5F5F5;
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+            transform: translate(-2px, -2px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .company-name {
+            font-family: 'Courier New', monospace;
+            font-size: 22px;
+            color: #000;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .date-range {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: #666;
+            background: #E0E0E0;
+            padding: 4px 10px;
+            border: 2px solid #000;
+        }
+
+        .position {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-item li {
+            font-family: 'Courier New', monospace;
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: #000;
+        }
+
+        .experience-item li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #000;
+            font-size: 20px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .project-card {
+            background: #F5F5F5;
+            border: 3px solid #000;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .project-card:hover {
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+            transform: translate(-2px, -2px);
+        }
+
+        .project-title {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #000;
+            letter-spacing: 1px;
+        }
+
+        .project-url {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .project-description {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .skill-tag {
+            font-family: 'Courier New', monospace;
+            background: #F5F5F5;
+            border: 2px solid #000;
+            padding: 8px 16px;
+            font-weight: normal;
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #000;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .skill-tag:hover {
+            background: #000;
+            color: #FFF;
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+        }
+
+        .contact-info {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            line-height: 2.2;
+        }
+
+        .contact-info p {
+            color: #000;
+            transition: all 0.3s;
+            padding: 5px 0;
+        }
+
+        .contact-link {
+            color: #000;
+            text-decoration: none;
+            font-weight: normal;
+            border-bottom: 2px solid #000;
+            transition: all 0.2s;
+            padding: 2px 4px;
+        }
+
+        .contact-link:hover {
+            background: #000;
+            color: #FFF;
+        }
+
+        @media (max-width: 768px) {
+            .window-content {
+                padding: 30px 20px;
+            }
+
+            .hero-title {
+                font-size: 56px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .character-container {
+                display: none;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes bootup {
+            0% { opacity: 0; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .browser-window {
+            animation: bootup 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="browser-window">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-button button-close"></div>
+                <div class="window-button button-minimize"></div>
+                <div class="window-button button-maximize"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <h1 class="hero-title">Samir<br>Pokhrel</h1>
+            <div class="hero-subtitle">Software Engineer — Agentic AI, MCP & Real-Time Systems</div>
+            
+            <div class="character-container" id="character">
+                <div class="speech-bubble" id="bubble">System Ready</div>
+                <svg class="pixel-character" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hair top -->
+                    <rect x="4" y="2" width="8" height="1" fill="#1a1a1a"/>
+                    <!-- Hair sides -->
+                    <rect x="3" y="3" width="1" height="3" fill="#1a1a1a"/>
+                    <rect x="12" y="3" width="1" height="3" fill="#1a1a1a"/>
+                    <rect x="4" y="3" width="8" height="1" fill="#1a1a1a"/>
+                    
+                    <!-- Head -->
+                    <rect x="4" y="4" width="8" height="5" fill="#D4A574"/>
+                    
+                    <!-- Eyes -->
+                    <rect x="5" y="5" width="2" height="1" fill="#000"/>
+                    <rect x="9" y="5" width="2" height="1" fill="#000"/>
+                    
+                    <!-- Smile -->
+                    <rect x="6" y="7" width="4" height="1" fill="#000"/>
+                    <rect x="5" y="6" width="1" height="1" fill="#000"/>
+                    <rect x="10" y="6" width="1" height="1" fill="#000"/>
+                    
+                    <!-- Body/Shirt -->
+                    <rect x="3" y="9" width="10" height="5" fill="#404040"/>
+                    
+                    <!-- Arms -->
+                    <rect x="1" y="10" width="2" height="3" fill="#D4A574"/>
+                    <rect x="13" y="10" width="2" height="3" fill="#D4A574"/>
+                    
+                    <!-- Legs -->
+                    <rect x="5" y="14" width="2" height="2" fill="#1a1a1a"/>
+                    <rect x="9" y="14" width="2" height="2" fill="#1a1a1a"/>
+                </svg>
+            </div>
+
+            <div class="section">
+                <div class="section-title">About</div>
+                <div class="bio-text">
+                    <p><strong>Role:</strong> Software Engineer — Agentic AI, MCP & Real-Time Systems</p>
+                    <p><strong>Location:</strong> Kathmandu, Nepal</p>
+                    <p>Software Engineer with 4+ years of experience architecting scalable microservices, real-time infrastructures, and event-management platforms. Expert in building Model Context Protocol (MCP) ecosystems, Agentic AI workflows, and automated media pipelines.</p>
+                    <p>Proven track record of leading core engineering for complex SaaS products like Lasius and Eventsmo, delivering modular architecture and high-performance backend systems.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Experience</div>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="company-name">Adex International</div>
+                        <div class="date-range">Mar 2024 – Present</div>
+                    </div>
+                    <div class="position">Software Engineer</div>
+                    <ul>
+                        <li>Leading core engineering for Lasius, an internal no-code Agentic AI workflow platform featuring multi-agent capabilities, knowledge bases, and custom data connectors.</li>
+                        <li>Built a full MCP Server ecosystem to automate Google Workspace (Docs, Drive, Sheets, Calendar), enabling SOW automation and dramatically reducing manual workflow time.</li>
+                        <li>Architected the Core Microservice Layer, including a Gateway Service for MCP server management and a Unified Authentication System (IDP, MCP Auth, OAuth).</li>
+                        <li>Developed a high-performance Proxy Layer supporting STDIO → SSE and Streamable HTTP.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="company-name">Yellow Nepal</div>
+                        <div class="date-range">Jun 2022 – Mar 2024</div>
+                    </div>
+                    <div class="position">Full Stack Developer</div>
+                    <ul>
+                        <li>Served as Core Engineer for Eventsmo, an all-in-one event management system. Built a Dynamic Branded App System that automatically generates event-specific mobile apps.</li>
+                        <li>Engineered backend for real-time video streaming platform, implementing custom RTMP media servers, FFMPEG pipelines for HLS/FLV conversion, and automated S3 archival.</li>
+                        <li>Developed and monetized mobile gaming titles (Solitaire, Sudoku) with Google Play Games integration.</li>
+                        <li>Spearheaded adoption of GraphQL Mesh to integrate legacy REST endpoints, eliminating 40% of redundant data fetching.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="company-name">Mehta Heino Industry Oy</div>
+                        <div class="date-range">Nov 2022 – 2023</div>
+                    </div>
+                    <div class="position">Software Developer (Remote)</div>
+                    <ul>
+                        <li>Enhanced Ultimaker Cura software clone for MANU 3D Printers, decreasing print failure rates by 60%.</li>
+                        <li>Built custom e-commerce platform for 3D printer sales using Node.js, Express, and Stripe, resulting in 20% sales increase.</li>
+                        <li>Formulated scalable applications leveraging TypeScript, GCP, Strapi, and Docker.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Projects</div>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-title">Lasius</div>
+                        <div class="project-url">lasius.io</div>
+                        <div class="project-description">No-Code Agentic Workflow Platform with multi-agent capabilities, knowledge bases, and custom data connectors. Architected Gateway Service and Unified Auth System.</div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Eventsmo</div>
+                        <div class="project-url">eventsmo.com</div>
+                        <div class="project-description">Event Management SaaS featuring ticketing, dynamic feed, forum, chat, and polls. Built Dynamic Branded App System for auto-generating event-specific mobile apps.</div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Goodboy CLI</div>
+                        <div class="project-url">Developer Tooling</div>
+                        <div class="project-description">CLI tool reducing project setup time by 60% for TypeScript backend applications. Customizable setups for REST/GraphQL with pre-configured Dockerfiles.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Skills</div>
+                <div class="skill-tags">
+                    <div class="skill-tag">JavaScript/TypeScript</div>
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">Go (Golang)</div>
+                    <div class="skill-tag">Node.js</div>
+                    <div class="skill-tag">FastAPI</div>
+                    <div class="skill-tag">MCP</div>
+                    <div class="skill-tag">Agentic AI</div>
+                    <div class="skill-tag">Docker</div>
+                    <div class="skill-tag">AWS</div>
+                    <div class="skill-tag">Microservices</div>
+                    <div class="skill-tag">WebRTC</div>
+                    <div class="skill-tag">RTMP</div>
+                    <div class="skill-tag">FFMPEG</div>
+                    <div class="skill-tag">gRPC</div>
+                    <div class="skill-tag">Redis</div>
+                    <div class="skill-tag">BullMQ</div>
+                    <div class="skill-tag">Flutter</div>
+                    <div class="skill-tag">Next.js</div>
+                    <div class="skill-tag">React</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Contact</div>
+                <div class="contact-info">
+                    <p>Email: <a href="mailto:sameeerpokhrel@gmail.com" class="contact-link">sameeerpokhrel@gmail.com</a></p>
+                    <p>Phone: <a href="tel:+9779762220263" class="contact-link">+977 9762220263</a></p>
+                    <p>LinkedIn: <a href="#" class="contact-link">/in/samir-pokhrel</a></p>
+                    <p>GitHub: <a href="#" class="contact-link">@samirpokhrel</a></p>
+                    <p>Portfolio: <a href="#" class="contact-link">portfolio.dev</a></p>
+                    <p>Location: Kathmandu, Nepal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const character = document.getElementById('character');
+        const sections = document.querySelectorAll('.section');
+        const bubble = document.getElementById('bubble');
+        
+        const messages = ['System Ready', 'About Me', 'Work History', 'My Projects', 'Tech Stack', 'Get in Touch'];
+        let currentSection = -1;
+        let targetX = 50;
+        let targetY = window.innerHeight / 2;
+        let currentX = 50;
+        let currentY = window.innerHeight / 2;
+        let isMoving = false;
+
+        function zigzagMovement() {
+            let closestSection = null;
+            let closestDistance = Infinity;
+            const windowCenter = window.innerHeight / 2;
+
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const sectionCenter = rect.top + rect.height / 2;
+                const distance = Math.abs(sectionCenter - windowCenter);
+
+                if (distance < closestDistance && rect.top < window.innerHeight && rect.bottom > 0) {
+                    closestDistance = distance;
+                    closestSection = index;
+                }
+            });
+
+            if (closestSection !== null && closestSection !== currentSection) {
+                currentSection = closestSection;
+                
+                bubble.textContent = messages[closestSection];
+                
+                // Zigzag pattern: alternate between left and right
+                if (closestSection % 2 === 0) {
+                    targetX = 50 + (Math.random() * 30);
+                } else {
+                    targetX = window.innerWidth - 150 - (Math.random() * 30);
+                }
+                
+                const sectionRect = sections[closestSection].getBoundingClientRect();
+                targetY = sectionRect.top + (sectionRect.height / 2) - 32;
+                
+                isMoving = true;
+                character.classList.add('walking');
+                
+                setTimeout(() => {
+                    isMoving = false;
+                    character.classList.remove('walking');
+                }, 600);
+            }
+        }
+
+        function animate() {
+            // Smooth interpolation
+            currentX += (targetX - currentX) * 0.1;
+            currentY += (targetY - currentY) * 0.1;
+            
+            character.style.left = currentX + 'px';
+            character.style.top = currentY + 'px';
+            
+            requestAnimationFrame(animate);
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    zigzagMovement();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Initial setup
+        character.style.left = currentX + 'px';
+        character.style.top = currentY + 'px';
+        zigzagMovement();
+        animate();
+    </script>
+</body>
+</html>
